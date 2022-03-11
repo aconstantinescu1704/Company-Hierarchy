@@ -1,0 +1,64 @@
+CERINTA 1:
+
+    - hire = Pentru angajarea unui nou employee si pentru inserarea lui corecta in arbore
+            am alocat si initializat campurile pentru un nou nod. Daca arborele era gol, 
+            radacina a devenit noul angajat inserat. In caz contrar se gaseste managerul 
+            viitorului angajat si se insereaza alfabetic noul angajat printre copiii 
+            managerului, facandu-se legaturile manager-employee; employee-manager. 
+            Insertia alfabetica se realizeaza prin functia insertAlpha care redimensioneaza
+            contorul si vectorul pe care il parcurge ulterior de la dreapta cautand locul de 
+            inserat. 
+    - fire = Concedierea unui angajat se face in 2 etape. Prima etapa se mut toti subalternii
+            (legaturile lor) la managerul angajatului prin functia de insertAlpha( functia nu 
+            copiaza ci schimba legaturile emplyee - manager). A doua etapa este stergerea 
+            legaturi de la manager la nodul de concediat prin functia deletealpha. La sfarsit eliberam
+            memoria pt nodul curent concediat. Functia deleteAlpha  mentine ordinea alfabetica si dupa 
+            stergerea legaturii prin deplasarea vectorului la stanga si redimensionarea contorului/ nr 
+            de subalternii
+    - promote = Promovarea se realizeaza in mai multi pasi. Primul pas este schimbarea legaturilor
+                echipei astfel incat sa apartina de managerul actual al angajatului pe care vrem sa-l 
+                promovam. Mai apoi stergem legaturile intre angajatul de promovat si echipa sa si inseram
+                anagajatul printre echipa managerului managerului. In final stergem legatura dintre vechiul
+                manager si angajatul promovat. Pt inserari si stergeri apelam la functia deleteAlpha si 
+                insertAlpha.
+    - move_employee = Functioneaza asemanator cu promote doar ca de data aceasta trebuie mai intai sa gasim 
+                      viitorul manager al nodului care urmeaza sa fie mutat. In rest pasii sunt identici. 
+                      Primul pas este schimbarea legaturilor echipei astfel incat sa apartina de managerul actual 
+                      al angajatului pe care vrem sa-l mutam. Mai apoi stergem legaturile intre angajatul de mutat
+                      si echipa sa si inseram anagajatul printre echipa managerului dat ca parametru. In final stergem 
+                      legatura dintre vechiul manager si angajatul mutat. Pt inserari si stergeri apelam la functia 
+                      deleteAlpha si insertAlpha. 
+    - move_team = Pentru a muta un intreg subarbore de angajati in alt loc se schimba legaturile dintre radacina 
+                  subarborelui de mutat si noul manager dat ca parametru. Functia de insert nu copiaza elemente ci 
+                  doar schimba legaturi. La final stergem legatura vechiului manager a radacinii si radacina
+    - fire_team = Cautam nodul radacina al subarborelui de sters si apelam functia recursiva deleteTeam. Functia 
+                  parcurge subarborele stergandu-l nod cu nod prin functia fire de concediere. La final stergem si nodul
+                  radacina a subarborelui
+
+    
+CERINTA 2:
+
+    - get_employees_by_manager = afisarea tuturor anagajitilor din subordinea unui manager se realizeaza printr-o functie 
+                                 recursiva care parcurge subarborele copiind rand pe rand elementele subarborelui intr-un nou
+                                 arbore in care pe al doilea nivel sa fie distribuite nodurile adaugate. La iesirea din functie
+                                 in arborele list vor fi asezate alfabetic toate nodurile pe nivelul 1. Adaugam si managerul in 
+                                 lista care era si radacina pentru a asigura ordinea alfabetica si afisam nivelul 1 din noul arbore 
+                                 creat.
+    - get_employees_by_level = afisarea tuturor angajatilor de pe nivel se face prin apelarea functiei recursive parcurgereNivel
+                                Functia parcurge arborele contorizand printr-un parametru nivelul curent la care se afla. Cand nivelul
+                                curent este egal cu cel precizat se dauga elementele intr-un arbore pe nivelul 1 pt a se ordona alfabetic
+                                La iesirea din functie se afiseaza nivelul 1 al arborelui nou construit
+
+    - get_best_manager = Prima etapa in afisarea angajatuli cu cea mai mare echipa este aflare nr maxim de angajatori din care este compusa
+                         o echipa prin apelarea functiei cautare max. Dupa aceea prin apelarea functiei recursive cautareBestManagers se
+                         parcurge arborele initial adaugandu se intr-un nou arbore pe nivelul 1 anagajatii care au nr de angajati egal cu max
+                         aflat anterior. La iesirea din functie se afiseaza nivelul 1 al arborelui nou format
+
+CERINTA 3:
+
+    - Prima etapa : aflam nivelul pe care se afla angajatul care va deveneni root si retinem intr-un vector de stringuri numele managerilor 
+                    aflati deasupra angajatului dat in ierarhie.
+    - Etapa 2 : la fiecare iteratie pana epuizam manageri de deasupra angajatului inseram printre copii unui nod varf managerul sau, stergem leg
+                managerului cu varful(caci varful fusese printre copii managerului) si actualizam varful care va arata la nodul manager anterior gasit 
+                si trecem la urmatorul manager din matricea construita. La final varful initial este root si punem managerul sau pe NULL
+                                  
